@@ -1,5 +1,5 @@
 {
-  "name": "vendor_name/01",
+  "name": "di-labs/container",
   "description": "description",
   "minimum-stability": "stable",
   "license": "MIT",
@@ -22,5 +22,18 @@
     "platform": {
       "php": "7.2.5"
     }
-  }
+  },
+	"autoload": {
+    "classmap": [
+		  "src"
+		]
+	},
+	"autoload-dev": {
+    "classmap": [
+		  "tests"
+		]
+	},
+	"scripts": {
+    "test": "./tools/phpunit ./tests"
+	}
 }
