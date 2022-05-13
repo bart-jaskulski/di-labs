@@ -2,15 +2,22 @@
 
 class ProductsTable {
 
-	public function install() {
-		global $wpdb;
+	/**
+	 * @var wpdb
+	 */
+	private $wpdb;
 
+	public function __construct(\wpdb $wpdb) {
+		$this->wpdb = $wpdb;
+	}
+
+	public function install() {
 		if ($this->is_installed()) {
 			return;
 		}
 
-		$table_name = $wpdb->prefix . 'products';
-		$result = $wpdb->query("CREATE TABLE ${table_name} (
+		$table_name = $this->wpdb->prefix . 'products';
+		$result = $this->wpdb->query("CREATE TABLE ${table_name} (
 			id bigint unsigned not null auto_increment,
 			title varchar(255) not null,
 			price decimal(26, 8) unsigned not null,

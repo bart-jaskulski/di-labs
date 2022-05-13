@@ -2,6 +2,15 @@
 
 class ProductsPage implements \WPDesk\PluginBuilder\Plugin\Hookable {
 
+	/**
+	 * @var ProductsListTable
+	 */
+	private $list_table;
+
+	public function __construct(ProductsListTable $list_table) {
+		$this->list_table = $list_table;
+	}
+
 	public function hooks(): void {
 		add_action('admin_init', [$this, 'register_export_page']);
 	}
@@ -17,10 +26,9 @@ class ProductsPage implements \WPDesk\PluginBuilder\Plugin\Hookable {
 	}
 
 	public function render(): void {
-		$products_list = new ProductsListTable();
-		$products_list->prepare_items();
+		$this->list_table->prepare_items();
 
-		$products_list->display();
+		$this->list_table->display();
 	}
 
 }

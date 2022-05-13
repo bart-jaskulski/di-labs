@@ -4,22 +4,22 @@ class ProductsExporter implements Exporter, \Psr\Log\LoggerAwareInterface {
 	use \Psr\Log\LoggerAwareTrait;
 
 	/**
-	 * @var ProductsList
+	 * @var ProductsRepository
 	 */
-	private $products;
+	private $repository;
 	/**
 	 * @var \League\Csv\Writer
 	 */
 	private $csv_writer;
 
-	public function __construct() {
-		$this->products = (new ProductsRepository())->get_all();
-		$this->csv_writer = \League\Csv\Writer::createFromFileObject(new SplTempFileObject());
+	public function __construct(ProductsRepository $repository, \League\Csv\Writer $writer) {
+		$this->repository = $repository;
+		$this->csv_writer = $writer;
 	}
 
 	public function export(): void {
-		$this->csv_writer->insertAll($this->products);
-		$this->logger->info('Products exported! Yay!'); // null pointer exception?
+		$this->csv_writer->insertAll($this->repository->get_all());
+		$this->logger->info('Products exported! Yay!');
 	}
 
 }

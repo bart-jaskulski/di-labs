@@ -7,8 +7,8 @@ class ProductsListTable extends \WP_List_Table {
 	 */
 	private $repository;
 
-	public function __construct( $args = array() ) {
-		$this->repository = new ProductsRepository();
+	public function __construct( ProductsRepository $repository, $args = array() ) {
+		$this->repository = $repository;
 		parent::__construct( $args );
 	}
 
