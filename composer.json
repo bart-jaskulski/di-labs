@@ -1,0 +1,26 @@
+{
+  "name": "vendor_name/01",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "bjaskulski",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "php": "^7.2|^8",
+    "psr/log": "^1",
+    "psr/container": "^1",
+    "league/csv": "^9.6"
+  },
+  "require-dev": {
+    "wpdesk/wp-plugin-flow": "^3"
+  },
+  "config": {
+    "platform": {
+      "php": "7.2.5"
+    }
+  }
+}
