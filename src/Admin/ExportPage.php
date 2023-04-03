@@ -1,15 +1,19 @@
 <?php declare( strict_types=1 );
 
-class ExportPage implements \WPDesk\PluginBuilder\Plugin\Hookable {
+namespace CleanWeb\PostExporter\Admin;
 
-	public function hooks(): void {
-		add_action('admin_init', [$this, 'register_export_page']);
+use CleanWeb\PostExporter\{HookProvider, Renderer};
+
+class ExportPage implements HookProvider {
+
+	public function registerHooks(): void {
+		add_action( 'admin_init', [ $this, 'registerExportPage' ] );
 	}
 
-	public function register_export_page(): void {
+	public function registerExportPage(): void {
 		add_menu_page(
-			'Exporter',
-			'Exporter',
+			esc_html__( 'Exporter', 'post-exporter' ),
+			esc_html__( 'Exporter', 'post-exporter' ),
 			'edit_others_posts',
 			'exporter',
 			[ $this, 'render' ]
@@ -17,12 +21,9 @@ class ExportPage implements \WPDesk\PluginBuilder\Plugin\Hookable {
 	}
 
 	public function render(): void {
-		?>
-		<form action="/wp-admin/admin-post.php">
-			<input type="hidden" name="action" value="export_products"/>
-			<button>Export</button>
-		</form>
-<?php
+		// FIXME
+		$renderer = new Renderer();
+		$renderer->render( 'export_page.php' );
 	}
 
 }

@@ -1,25 +1,24 @@
-<?php declare(strict_types=1);
+<?php declare( strict_types=1 );
 
-class Plugin extends \WPDesk\PluginBuilder\Plugin\AbstractPlugin implements \Psr\Log\LoggerAwareInterface {
-	use \Psr\Log\LoggerAwareTrait;
+namespace CleanWeb\PostExporter;
 
-    public function __construct($plugin_info) {
-        parent::__construct($plugin_info);
-		$this->logger = new \Psr\Log\NullLogger();
-    }
+use CleanWeb\PostExporter\Admin;
 
-	public function init() {
-		(new ProductsTable())->install();
-		parent::init();
-	}
+/**
+ * Our main bootstrapping class, which is reponsible for registering
+ * into main WordPress lifeclycle and register our classes inside
+ * top-level hooks.
+ */
+final class Plugin {
 
-	protected function hooks() {
-		add_action('plugins_loaded', function () {
-			(new ExportRequest())->hooks();
-			(new ExportPage())->hooks();
-			(new ProductsPage())->hooks();
-		});
-		parent::hooks();
+	public function registerHooks(): void {
+		add_action(
+			'admin_init',
+			static function () {
+				( new Admin\ExportPage() )->registerHooks();
+				( new Admin\ExportRequest() )->registerHooks();
+			}
+		);
 	}
 
 }
