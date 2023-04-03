@@ -2,12 +2,20 @@
 
 namespace CleanWeb\PostExporter\Admin;
 
-use CleanWeb\PostExporter\{HookProvider, Renderer};
+use CleanWeb\PostExporter\Renderer;
+use WPDesk\WPHook\HookSubscriber\HookSubscriber;
 
-class ExportPage implements HookProvider {
+class ExportPage implements HookSubscriber {
 
-	public function registerHooks(): void {
-		add_action( 'admin_init', [ $this, 'registerExportPage' ] );
+	/** @var Renderer */
+	private $renderer;
+
+	public function __construct( Renderer $renderer ) {
+		$this->renderer = $renderer;
+	}
+
+	public static function register(): iterable {
+		yield 'admin_init' => 'registerExportPage';
 	}
 
 	public function registerExportPage(): void {
@@ -21,9 +29,6 @@ class ExportPage implements HookProvider {
 	}
 
 	public function render(): void {
-		// FIXME
-		$renderer = new Renderer();
-		$renderer->render( 'export_page.php' );
+		$this->renderer->render( 'export_page.php' );
 	}
-
 }

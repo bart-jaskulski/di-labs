@@ -15,9 +15,8 @@ class Renderer {
 	 */
 	private $templatesDirectory;
 
-	public function __construct() {
-		// TODO
-		$this->templatesDirectory = __DIR__ . '/../templates/';
+	public function __construct( string $templatesDirectory ) {
+		$this->templatesDirectory = $templatesDirectory;
 	}
 
 	/**

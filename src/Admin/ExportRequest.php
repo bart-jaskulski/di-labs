@@ -2,22 +2,32 @@
 
 namespace CleanWeb\PostExporter\Admin;
 
-use CleanWeb\PostExporter\Export\PostExporter;
-use CleanWeb\PostExporter\HookProvider;
+use CleanWeb\PostExporter\Export\Exporter;
+use WPDesk\WPHook\HookSubscriber\Deferred;
+use WPDesk\WPHook\HookSubscriber\HookSubscriber;
 
 /**
  * Handle admin request to export posts.
  */
-class ExportRequest implements HookProvider {
+class ExportRequest implements HookSubscriber, Deferred {
+	/** @var Exporter */
+	private $exporter;
 
-	public function registerHooks(): void {
-		add_action( 'admin_post_export_posts', [ $this, 'export_posts' ] );
+	public function __construct( Exporter $exporter ) {
+		$this->exporter = $exporter;
+	}
+
+	public static function register_after() {
+		return 'admin_init';
+	}
+
+	public static function register(): iterable {
+		yield 'admin_post_export_posts' => 'exportPosts';
 	}
 
 	public function exportPosts(): void {
-		// TODO
-		$exporter = new PostExporter();
-		$exporter->export();
+		$this->exporter->export();
 		die;
 	}
+
 }

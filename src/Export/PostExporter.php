@@ -2,29 +2,31 @@
 
 namespace CleanWeb\PostExporter\Export;
 
-use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait};
+use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface};
 use League\Csv\Writer;
 
 /**
  * Write our posts to CSV file.
  */
-class PostExporter implements Exporter, LoggerAwareInterface {
-	// TODO
-	use LoggerAwareTrait;
+class PostExporter implements Exporter {
 
 	/** @var \League\Csv\Writer */
 	private $csvWriter;
 
-	public function __construct() {
-		$this->csvWriter = Writer::createFromFileObject( new \SplTempFileObject() );
+	/** @var LoggerInterface */
+	private $logger;
+
+	public function __construct( Writer $csvWriter, LoggerInterface $logger ) {
+		$this->csvWriter = $csvWriter;
+		$this->logger    = $logger;
 	}
 
 	public function export(): void {
 		$this->logger->debug( 'Exporting posts...' );
 		// TODO
 		$query = new \WP_Query();
-		$this->csv_writer->insertAll( $query->get_posts() );
-		$this->logger->info( 'Posts exported! Yay!' ); // TODO: null pointer exception?
+		$this->csvWriter->insertAll( $query->get_posts() );
+		$this->logger->info( 'Posts exported! Yay!' );
 	}
 
 }
