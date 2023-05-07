@@ -8,6 +8,9 @@ namespace CleanWeb\PostExporter;
  */
 interface HookProvider {
 
-  public function registerHooks(): void;
+	/**
+	 * Register callbacks for WordPress hooks.
+	 */
+	public function registerHooks(): void;
 
 }

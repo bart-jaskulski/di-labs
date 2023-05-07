@@ -10,13 +10,11 @@ class Renderer {
 
 	/**
 	 * Absolute path to directory with our templates.
-	 *
-	 * @var string
 	 */
-	private $templatesDirectory;
+	private string $templatesDirectory;
 
 	public function __construct() {
-		// TODO
+		// FIXME: does renderer really need to know explicitly about its own location?
 		$this->templatesDirectory = __DIR__ . '/../templates/';
 	}
 
@@ -24,8 +22,8 @@ class Renderer {
 	 * Render template file for display.
 	 */
 	public function render( string $template ): void {
-		ob_start();
-		include $this->templatesDirectory . ltrim( $template, '/' );
-		echo ob_get_clean();
+		\ob_start();
+		include $this->templatesDirectory . \ltrim( $template, '/' );
+		echo \ob_get_clean();
 	}
 }

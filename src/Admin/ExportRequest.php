@@ -11,11 +11,13 @@ use CleanWeb\PostExporter\HookProvider;
 class ExportRequest implements HookProvider {
 
 	public function registerHooks(): void {
-		add_action( 'admin_post_export_posts', [ $this, 'export_posts' ] );
+		\add_action( 'admin_post_export_posts', $this->exportPosts(...) );
 	}
 
-	public function exportPosts(): void {
-		// TODO
+	private function exportPosts(): void {
+		// FIXME: How can we parametrize request to export different kind of
+		// data? Is it possible to create WooCommerce product exporter
+		// without adding new hook callback?
 		$exporter = new PostExporter();
 		$exporter->export();
 		die;

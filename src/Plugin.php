@@ -12,10 +12,11 @@ use CleanWeb\PostExporter\Admin;
 final class Plugin {
 
 	public function registerHooks(): void {
-		add_action(
-			'admin_init',
+		\add_action(
+			'init',
 			static function () {
 				( new Admin\ExportPage() )->registerHooks();
+				( new Admin\AboutPage() )->registerHooks();
 				( new Admin\ExportRequest() )->registerHooks();
 			}
 		);
