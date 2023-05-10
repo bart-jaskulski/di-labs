@@ -20,6 +20,10 @@ class ExportRequest implements HookProvider {
 		// without adding new hook callback?
 		$exporter = new PostExporter();
 		$exporter->export();
+		/**
+		 * $product_exporter = new ProductExporter(\wc_get_products());
+		 * $product_exporter->export();
+		 */
 		die;
 	}
 }

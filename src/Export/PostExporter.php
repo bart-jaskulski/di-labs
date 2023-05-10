@@ -24,7 +24,7 @@ class PostExporter implements Exporter, LoggerAwareInterface {
 	public function export(): void {
 		// FIXME: potential null pointer exception. Object comes from
 		// a setter which may not be called at all.
-		$this->logger?->debug( 'Exporting posts...' );
+		$this->logger->debug( 'Exporting posts...' );
 
 		// FIXME: query is hardcoded. How can we parametrize export?
 		$query = new \WP_Query();
