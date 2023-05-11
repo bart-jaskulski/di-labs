@@ -2,8 +2,8 @@
 
 namespace CleanWeb\PostExporter\Export;
 
-use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait};
-use League\Csv\Writer;
+use PostExporterVendor\Psr\Log\{LoggerAwareInterface, LoggerAwareTrait};
+use PostExporterVendor\League\Csv\Writer;
 
 /**
  * Write our posts to CSV file.

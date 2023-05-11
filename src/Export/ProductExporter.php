@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CleanWeb\PostExporter\Export;
 
-use League\Csv\Writer;
+use PostExporterVendor\League\Csv\Writer;
 
 /**
  * WIP class for exporting products
