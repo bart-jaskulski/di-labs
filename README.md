@@ -11,7 +11,7 @@ Dodatkowo warto rozumieć prefixowanie zależności.
 ## Instalacja
 
 ```sh
-composer install
+composer install && composer prefix
 ```
 
 ## Wykorzystywanie
