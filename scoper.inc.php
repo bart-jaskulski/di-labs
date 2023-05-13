@@ -20,7 +20,7 @@ return [
                 'Tests',
                 'vendor-bin',
             ])
-            ->in(['vendor/league/csv']),
+            ->in(['vendor/league/csv', 'vendor/psr']),
     ],
     'exclude-namespaces' => [
         // 'Acme\Foo'                     // The Acme\Foo namespace (and sub-namespaces)
