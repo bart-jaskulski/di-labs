@@ -1,40 +1,30 @@
-# Dependency injection in WordPress plugin
+# Wstrzykiwanie zależności w projektach WordPressowych
 
-This repository serves educational purposes, introducing autowired dependency injection containers in any WordPress plugin or theme to leverage the use of modern best practices and ease the development process.
+Projekt służy celom edukacyjnym, wprowadzając kontenery do wstrzykiwania zależności w dowolnym projekcie WordPressowym, pomagając w czerpaniu korzyści z nowoczesnych dobrych praktyk i ułatwiając proces rozwoju wtyczki.
 
-## Prerequisites
+## Wymagania wstępne
 
-This project assumes you are familiar with using Composer in your projects and you are making use of class autoloading feature, preferably according to PSR-4 recomendation (not strictly required).
+Projekt zakłada, że jesteś zaznajomiony z wykorzystywaniem Composera w projektach i potrafisz korzystać z autoładowania klas, najlepiej zgodnie z [rekomendacją PSR-4](https://php-figorg/psr/psr-4) (nie wymagane ściśle).
 
-In addition, it is worth to understand dependency prefixing.
+Dodatkowo warto rozumieć prefixowanie zależności.
 
-## Installation
+## Instalacja
 
 ```sh
 composer install
 ```
 
-## Usage
+## Wykorzystywanie
 
-This repository is split into two main branches: `no-di` and `di`.
+Repozytorium jest podzielone na dwie główne gałęzie:
 
-First one present a plugin which is making use of some good, modern techniques, but clearly violates important principles, which prevents us from introducing decoupled architecture and, in result, integrate Dependency Injection Container. This will be treated as our starting point, from which, with series of refactorization we will improve our project's structure and open for further improvements.
+- `main`, która zawiera początkowy kod wtyczki, wymagający refaktoryzacji
+- `with-di`, która przedstawia docelowy kod, poprawiony i korzystający z kontenera DI
 
-`di` branch is our target plugin, the one we want to achieve through our improvements.
+Ponadto, najważniejsza wiedza zebrana na tematy potrzebne w wykonaniu zadania została zawarta w formie artykułów, dostępnych w folderze `docs` lub przez stronę <https://bart-jaskulski.github.io/di-labs>.
 
-## Key takeaways
+## Kluczowe punkty
 
-- Learn and understand Dependency Inversion Principle.
-- Write classes which are independent from WordPress and integrate with WP in small, single-purposed hook services.
-- Leverage the use of Dependency Injection Container with autowired dependencies to simplify your plugin bootstrapping logic.
-
-## Testing
-
-```sh
-composer test
-```
-
-## Further resources
-
-- https://php-di.org/doc/understanding-di.html
-- https://igor.io/2013/03/31/stateless-services.html
+- Poznanie i zrozumienie *zasady odwracania zależności* (Dependency Inversion Principle)
+- Pisanie klas, które są niezależne od WordPressa i integrują się z WP w małych, jedno-zadaniowych serwisach dla hooków
+- Wykorzystanie kontenerów do wstrzykiwania zależności z autodowiązaniem zależności dla ułatwienia logiki rozruchu wtyczki
