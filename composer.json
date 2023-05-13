@@ -17,12 +17,16 @@
       "psr/log": "^1"
     },
     "require-dev": {
-      "league/csv": "^9.6"
+      "league/csv": "^9.6",
+      "php-di/php-di": "^7.0"
     },
     "autoload": {
       "psr-4": {
         "CleanWeb\\PostExporter\\": "src"
-      }
+      },
+      "classmap": [
+        "vendor_prefixed"
+      ]
     },
     "autoload-dev": {
       "psr-4": {

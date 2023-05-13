@@ -20,7 +20,15 @@ return [
                 'Tests',
                 'vendor-bin',
             ])
-            ->in(['vendor/league/csv']),
+            ->in([
+              'vendor/psr',
+              'vendor/league/csv',
+              'vendor/php-di',
+              'vendor/laravel/serializable-closure'
+            ]),
+    ],
+    'exclude-files' => [
+      'vendor/php-di/php-di/src/Compiler/Template.php',
     ],
     'exclude-namespaces' => [
         // 'Acme\Foo'                     // The Acme\Foo namespace (and sub-namespaces)

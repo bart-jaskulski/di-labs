@@ -2,44 +2,31 @@
 
 namespace CleanWeb\PostExporter\Export;
 
-use PostExporterVendor\Psr\Log\{LoggerAwareInterface, LoggerAwareTrait};
+use PostExporterVendor\Psr\Log\LoggerInterface;
 use PostExporterVendor\League\Csv\Writer;
 
 /**
  * Write our posts to CSV file.
  */
-class PostExporter implements Exporter, LoggerAwareInterface {
-	// FIXME: what means "aware"? Can we predict content of this trait
-	// without reading through the source? Do we depend on any magically
-	// applied class properties?
-	use LoggerAwareTrait;
+class PostExporter implements Exporter {
 
-	private Writer $csvWriter;
-
-	public function __construct() {
-		// FIXME: do we really require a Writer created ONLY from \SplTempFileObject?
-		$this->csvWriter = Writer::createFromFileObject( new \SplTempFileObject() );
+	public function __construct(
+		private readonly Writer $csvWriter,
+		private readonly LoggerInterface $logger
+	) {
 	}
 
-	public function export(): void {
-		// FIXME: potential null pointer exception. Object comes from
-		// a setter which may not be called at all.
+	public function export( Query $query ): void {
 		$this->logger->debug( 'Exporting posts...' );
-
-		// FIXME: query is hardcoded. How can we parametrize export?
-		$query = new \WP_Query();
 
 		$this->csvWriter->insertAll(
 			\array_map(
 				static fn ( $post ) => \get_object_vars( $post ),
-				$query->get_posts()
+				$query->get_all()
 			)
 		);
 
-		// FIXME: nullsafe operator? Maybe, but apart from being a feature
-		// available only in PHP 8, we cannot determine if our message
-		// actually gets logged.
-		$this->logger?->info( 'Posts exported! Yay!' );
+		$this->logger->info( 'Posts exported! Yay!' );
 		$this->csvWriter->output( 'posts.csv' );
 	}
 

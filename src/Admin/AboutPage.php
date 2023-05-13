@@ -6,6 +6,10 @@ use CleanWeb\PostExporter\{HookProvider, Renderer};
 
 class AboutPage implements HookProvider {
 
+	public function __construct(
+		private readonly Renderer $renderer
+	) {}
+
 	public function registerHooks(): void {
 		\add_action( 'admin_menu', $this->registerAboutPage(...) );
 	}
@@ -22,11 +26,7 @@ class AboutPage implements HookProvider {
 	}
 
 	private function render(): void {
-		// FIXME: Even though we are using the same renderer in ExportPage,
-		// we create a new instance here. Is it possible to share those
-		// instances?
-		$renderer = new Renderer();
-		$renderer->render( 'about.php' );
+		$this->renderer->render( 'about.php' );
 	}
 
 }

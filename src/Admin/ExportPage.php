@@ -6,6 +6,10 @@ use CleanWeb\PostExporter\{HookProvider, Renderer};
 
 class ExportPage implements HookProvider {
 
+	public function __construct(
+		private readonly Renderer $renderer
+	) {}
+
 	public function registerHooks(): void {
 		\add_action( 'admin_menu', $this->registerExportPage(...) );
 	}
@@ -21,9 +25,7 @@ class ExportPage implements HookProvider {
 	}
 
 	private function render(): void {
-		// FIXME
-		$renderer = new Renderer();
-		$renderer->render( 'export_page.php' );
+		$this->renderer->render( 'export_page.php' );
 	}
 
 }

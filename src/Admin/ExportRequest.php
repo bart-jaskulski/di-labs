@@ -2,7 +2,8 @@
 
 namespace CleanWeb\PostExporter\Admin;
 
-use CleanWeb\PostExporter\Export\PostExporter;
+use CleanWeb\PostExporter\Export\ExporterFactory;
+use CleanWeb\PostExporter\Export\Query\QueryFactory;
 use CleanWeb\PostExporter\HookProvider;
 
 /**
@@ -10,20 +11,25 @@ use CleanWeb\PostExporter\HookProvider;
  */
 class ExportRequest implements HookProvider {
 
+	public function __construct(
+		private readonly ExporterFactory $exporterFactory,
+		private readonly QueryFactory $queryFactory,
+	) {}
+
 	public function registerHooks(): void {
 		\add_action( 'admin_post_export_posts', $this->exportPosts(...) );
 	}
 
 	private function exportPosts(): void {
-		// FIXME: How can we parametrize request to export different kind of
-		// data? Is it possible to create WooCommerce product exporter
-		// without adding new hook callback?
-		$exporter = new PostExporter();
-		$exporter->export();
-		/**
-		 * $product_exporter = new ProductExporter(\wc_get_products());
-		 * $product_exporter->export();
-		 */
-		die;
+		try {
+			$kind = \sanitize_text_field($_POST['export_type'] ?? 'posts')
+			$exporter = $this->exporterFactory->getExporter($kind);
+			$exporter->export($this->queryFactory->getQuery($kind);
+			die;
+		} catch (\RuntimeException) {
+			\wp_die(
+				\esc_html__('Failed to export requested data.', 'post-exporter')
+			);
+		}
 	}
 }

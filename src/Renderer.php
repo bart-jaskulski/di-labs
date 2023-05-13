@@ -8,14 +8,9 @@ namespace CleanWeb\PostExporter;
  */
 class Renderer {
 
-	/**
-	 * Absolute path to directory with our templates.
-	 */
-	private string $templatesDirectory;
-
-	public function __construct() {
-		// FIXME: does renderer really need to know explicitly about its own location?
-		$this->templatesDirectory = __DIR__ . '/../templates/';
+	public function __construct(
+		private readonly string $templatesDirectory
+	) {
 	}
 
 	/**
