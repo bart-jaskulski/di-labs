@@ -23,7 +23,7 @@
       "psr-4": {
         "CleanWeb\\PostExporter\\": "src"
       },
-      "files": [
+      "classmap": [
         "vendor_prefixed"
       ]
     },
