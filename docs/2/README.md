@@ -1,6 +1,6 @@
 # Przykre zapaszki w kontekście odwracania zależności
 
-Łamanie zasady odwracania zależności (jednej z pięciu zasad SOLID) jest dość częste we wtyczkach i motywach WordPressowych. Jakie są najszęstsze przejawy naruszenia tych zasad?
+Łamanie zasady odwracania zależności (jednej z pięciu zasad SOLID) jest dość częste we wtyczkach i motywach WordPressowych. Jakie są najczęstsze przejawy naruszenia tych zasad?
 
 ## Tworzenie obiektów w konstruktorze klasy
 
