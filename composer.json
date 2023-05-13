@@ -22,7 +22,10 @@
     "autoload": {
       "psr-4": {
         "CleanWeb\\PostExporter\\": "src"
-      }
+      },
+      "files": [
+        "vendor_prefixed"
+      ]
     },
     "autoload-dev": {
       "psr-4": {
